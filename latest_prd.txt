@@ -1,0 +1,529 @@
+# Deep Research Agent - Product Requirements Document (PRD)
+## LangChain Framework Implementation with Enhanced Self-Improvement & Comprehensive Source Attribution
+
+## 📋 **PROJECT OVERVIEW**
+
+Build a sophisticated, **self-improving** AI research agent using **LangChain and LangGraph** that can perform deep research across **any domain** - from highly specialized niche subjects to broad general topics - with a hybrid architecture combining local LLMs and cloud AI services. **Critical requirement: All information must be fully traceable to original sources with comprehensive citation.**
+
+### **Core Vision** (Enhanced)
+Create an autonomous research assistant that:
+- **Handles any research domain** - from niche technical subjects to broad interdisciplinary topics
+- **Provides comprehensive source attribution** for every piece of information
+- **Learns and improves from each research session** using enhanced LangChain memory systems
+- **Adapts to research complexity** - scaling from simple queries to deep academic investigations
+- **Synthesizes information from 60+ free APIs and data sources** with full source tracking
+- **Delivers research with complete bibliographic integrity** in multiple professional formats
+- **Operates cost-effectively** while maintaining research depth and source quality
+- **Genuinely evolves its research capabilities** across all domains through continuous learning
+
+---
+
+## 🏗️ **ARCHITECTURE OVERVIEW**
+
+### **Universal Research Capability Framework**
+The agent is designed as a **domain-agnostic research system** that can:
+- **Automatically identify research domain complexity** (niche vs. broad)
+- **Scale research depth** based on subject requirements
+- **Maintain source integrity** regardless of topic specialization
+- **Adapt tool selection** for optimal domain coverage
+
+### **LangChain-Enhanced Hybrid LLM Strategy**
+- **Local LLM Primary**: LangChain Ollama integration with Llama 3.2 3B/Mistral 7B Q4 for:
+  - Domain analysis and complexity assessment
+  - Source categorization and credibility evaluation
+  - Citation formatting and verification
+  - Multi-domain query optimization
+- **Cloud LLM Secondary**: LangChain Google Gemini integration for:
+  - Complex cross-domain synthesis
+  - Niche subject matter analysis
+  - Advanced source correlation
+  - Comprehensive report generation with citations
+- **Smart Routing**: Optimizes for research depth while minimizing costs
+- **Source-First Architecture**: Every piece of information tracked to original source
+
+### **Core Components (Source-Centric Design)**
+1. **Universal Research Orchestrator** - Handles any domain complexity
+2. **Source Attribution Engine** - Tracks and formats all citations
+3. **Domain Intelligence Router** - Adapts strategy based on subject matter
+4. **Comprehensive Citation Manager** - Maintains bibliographic integrity
+5. **Multi-Domain Memory Systems** - Learns patterns across all research areas
+6. **Source Quality Validator** - Evaluates credibility across domains
+7. **Professional Bibliography Generator** - Creates proper citations in all formats
+8. **Research Depth Optimizer** - Scales investigation based on topic complexity
+
+---
+
+## 🔍 **COMPREHENSIVE SOURCE ATTRIBUTION SYSTEM**
+
+### **Source Tracking Architecture**
+```python
+class SourceAttributionEngine:
+    def __init__(self):
+        self.source_registry = {
+            'primary_sources': [],      # Original research, datasets, official docs
+            'secondary_sources': [],    # Analysis, reviews, interpretations
+            'tertiary_sources': [],     # Encyclopedias, summaries, compilations
+            'web_sources': [],          # Online articles, blogs, forums
+            'academic_sources': [],     # Peer-reviewed papers, theses
+            'government_sources': [],   # Official publications, statistics
+            'commercial_sources': [],   # Industry reports, company data
+            'multimedia_sources': []    # Videos, podcasts, presentations
+        }
+        
+        self.citation_metadata = {
+            'url': None,
+            'title': None,
+            'author': None,
+            'publication_date': None,
+            'access_date': None,
+            'publication': None,
+            'doi': None,
+            'isbn': None,
+            'page_numbers': None,
+            'credibility_score': None,
+            'source_type': None,
+            'domain_relevance': None
+        }
+        
+    def track_information_source(self, content, source_metadata):
+        """
+        Track every piece of information to its original source
+        - Links content fragments to specific sources
+        - Maintains chain of information custody
+        - Enables precise citation generation
+        """
+        source_id = self.register_source(source_metadata)
+        content_hash = self.generate_content_hash(content)
+        
+        self.source_content_map[content_hash] = {
+            'source_id': source_id,
+            'original_text': content,
+            'extraction_timestamp': datetime.now(),
+            'confidence_score': self.assess_extraction_confidence(content, source_metadata)
+        }
+        
+        return source_id
+        
+    def generate_citations(self, format_style='APA'):
+        """
+        Generate proper citations in multiple academic formats
+        - APA, MLA, Chicago, Harvard, IEEE styles
+        - Automatically format based on source type
+        - Include all required metadata elements
+        """
+        citations = {}
+        for source_id, metadata in self.source_registry.items():
+            citations[source_id] = self.format_citation(metadata, format_style)
+        return citations
+```
+
+### **Multi-Format Citation Support**
+```python
+CITATION_FORMATS = {
+    'APA': APACitationFormatter(),
+    'MLA': MLACitationFormatter(), 
+    'Chicago': ChicagoCitationFormatter(),
+    'Harvard': HarvardCitationFormatter(),
+    'IEEE': IEEECitationFormatter(),
+    'Vancouver': VancouverCitationFormatter(),
+    'Nature': NatureCitationFormatter(),
+    'Custom': CustomCitationFormatter()
+}
+
+class CitationManager:
+    def format_inline_citation(self, source_id, page_number=None):
+        """Generate proper in-text citations"""
+        return f"({self.get_author_year(source_id)}{', p. ' + page_number if page_number else ''})"
+        
+    def generate_bibliography(self, sources, format_style='APA'):
+        """Generate complete bibliography/references section"""
+        formatter = CITATION_FORMATS[format_style]
+        return formatter.create_bibliography(sources)
+```
+
+---
+
+## 🌐 **UNIVERSAL DOMAIN INTELLIGENCE**
+
+### **Domain-Adaptive Research Strategy**
+```python
+class UniversalResearchIntelligence:
+    def __init__(self):
+        self.domain_patterns = {
+            'academic_disciplines': {
+                'STEM': ['physics', 'chemistry', 'biology', 'mathematics', 'engineering'],
+                'humanities': ['history', 'literature', 'philosophy', 'arts', 'languages'],
+                'social_sciences': ['psychology', 'sociology', 'economics', 'political_science'],
+                'applied_sciences': ['medicine', 'agriculture', 'technology', 'business']
+            },
+            'niche_indicators': [
+                'technical_terminology_density',
+                'specialized_jargon_presence', 
+                'narrow_scope_keywords',
+                'expert_community_size',
+                'publication_volume'
+            ],
+            'complexity_metrics': {
+                'interdisciplinary_connections': 0.0,
+                'technical_depth_required': 0.0,
+                'source_diversity_needed': 0.0,
+                'expertise_level_required': 0.0
+            }
+        }
+    
+    def analyze_research_domain(self, query):
+        """
+        Automatically determine domain characteristics and research requirements
+        - Identifies if topic is niche or broad
+        - Assesses required research depth
+        - Determines optimal source types
+        - Plans appropriate investigation strategy
+        """
+        domain_analysis = {
+            'primary_domain': self.identify_primary_domain(query),
+            'secondary_domains': self.identify_cross_domain_connections(query),
+            'niche_level': self.assess_niche_specialization(query),
+            'complexity_score': self.calculate_complexity_requirements(query),
+            'source_strategy': self.plan_source_strategy(query),
+            'research_depth': self.determine_investigation_depth(query)
+        }
+        
+        return domain_analysis
+    
+    def adapt_research_strategy(self, domain_analysis):
+        """
+        Customize research approach based on domain characteristics
+        - Scale tool selection for domain coverage
+        - Adjust source quality thresholds
+        - Optimize for niche vs. broad information needs
+        """
+        if domain_analysis['niche_level'] > 0.7:
+            return self.configure_niche_research_strategy(domain_analysis)
+        elif domain_analysis['complexity_score'] > 0.8:
+            return self.configure_deep_research_strategy(domain_analysis)
+        else:
+            return self.configure_broad_research_strategy(domain_analysis)
+```
+
+### **Niche vs. Broad Research Optimization**
+```python
+class ResearchStrategyOptimizer:
+    def configure_niche_research_strategy(self, domain_analysis):
+        """
+        Specialized approach for niche subjects
+        - Prioritize expert sources and academic papers
+        - Include specialized databases and forums
+        - Emphasize primary source materials
+        - Cross-reference limited available sources
+        """
+        return {
+            'tool_priorities': ['academic_databases', 'expert_forums', 'specialized_apis'],
+            'source_quality_threshold': 0.8,
+            'depth_over_breadth': True,
+            'expert_source_weight': 0.9,
+            'cross_reference_intensity': 'high'
+        }
+    
+    def configure_broad_research_strategy(self, domain_analysis):
+        """
+        Comprehensive approach for broad subjects  
+        - Balance multiple source types
+        - Include diverse perspectives
+        - Synthesize across domains
+        - Maintain breadth while ensuring depth
+        """
+        return {
+            'tool_priorities': ['web_search', 'news_apis', 'academic_sources', 'multimedia'],
+            'source_quality_threshold': 0.6,
+            'breadth_and_depth': True,
+            'perspective_diversity': 0.8,
+            'synthesis_complexity': 'high'
+        }
+```
+
+---
+
+## 📊 **ENHANCED API INTEGRATION WITH SOURCE TRACKING**
+
+### **Source-Aware API Tool Architecture**
+```python
+# Each API tool enhanced with comprehensive source attribution
+class SourceAwareAPITool:
+    def __init__(self, api_client, source_tracker):
+        self.api_client = api_client
+        self.source_tracker = source_tracker
+        
+    def execute_search(self, query, domain_context):
+        """
+        Execute search with full source attribution
+        - Capture complete source metadata
+        - Track information provenance
+        - Assess source credibility for domain
+        """
+        results = self.api_client.search(query)
+        attributed_results = []
+        
+        for result in results:
+            source_metadata = self.extract_complete_metadata(result)
+            source_id = self.source_tracker.register_source(source_metadata)
+            credibility_score = self.assess_domain_credibility(source_metadata, domain_context)
+            
+            attributed_results.append({
+                'content': result.content,
+                'source_id': source_id,
+                'credibility_score': credibility_score,
+                'extraction_date': datetime.now(),
+                'domain_relevance': self.calculate_domain_relevance(result, domain_context)
+            })
+            
+        return attributed_results
+
+# Enhanced API Suite with Universal Coverage
+COMPREHENSIVE_API_TOOLS = {
+    # Academic & Scientific (15 tools)
+    "arxiv": ArxivTool(),
+    "pubmed": PubMedTool(),
+    "semantic_scholar": SemanticScholarTool(),
+    "crossref": CrossRefTool(),
+    "doaj": DOAJTool(),
+    "core_academic": CoreAcademicTool(),
+    "google_scholar": GoogleScholarTool(),
+    "researchgate": ResearchGateTool(),
+    "ieee_xplore": IEEEXploreTool(),
+    "jstor": JSTORTool(),
+    "springer": SpringerTool(),
+    "wiley": WileyTool(),
+    "elsevier": ElsevierTool(),
+    "nature": NatureTool(),
+    "science_direct": ScienceDirectTool(),
+    
+    # Web Search & General (10 tools)
+    "google_search": GoogleSearchTool(),
+    "bing_search": BingSearchTool(),
+    "duckduckgo": DuckDuckGoTool(),
+    "yandex": YandexSearchTool(),
+    "brave_search": BraveSearchTool(),
+    "searx": SearxTool(),
+    "startpage": StartPageTool(),
+    "wikipedia": WikipediaTool(),
+    "wikidata": WikidataTool(),
+    "dbpedia": DBpediaTool(),
+    
+    # News & Media (10 tools)
+    "newsapi": NewsAPITool(),
+    "guardian": GuardianTool(),
+    "nytimes": NYTimesTool(),
+    "bbc": BBCTool(),
+    "reuters": ReutersTool(),
+    "ap_news": APNewsTool(),
+    "allsides": AllSidesTool(),
+    "ground_news": GroundNewsTool(),
+    "mediacloud": MediaCloudTool(),
+    "factcheck": FactCheckTool(),
+    
+    # Government & Official (8 tools)
+    "usa_gov": USAGovTool(),
+    "census_bureau": CensusBureauTool(),
+    "world_bank": WorldBankTool(),
+    "un_data": UNDataTool(),
+    "oecd": OECDTool(),
+    "eurostat": EurostatTool(),
+    "who_data": WHODataTool(),
+    "fda": FDATool(),
+    
+    # Specialized Domains (12 tools)
+    "github": GitHubTool(),
+    "stackoverflow": StackOverflowTool(),
+    "reddit": RedditTool(),
+    "youtube": YouTubeTool(),
+    "podcast_index": PodcastIndexTool(),
+    "archive_org": ArchiveOrgTool(),
+    "patents": PatentsTool(),
+    "clinical_trials": ClinicalTrialsTool(),
+    "usda_nutrition": USDANutritionTool(),
+    "openweather": OpenWeatherTool(),
+    "nasa_data": NASADataTool(),
+    "economic_data": EconomicDataTool(),
+    
+    # Cultural & Creative (5 tools)
+    "museum_apis": MuseumAPIsTool(),
+    "library_archives": LibraryArchivesTool(),
+    "cultural_heritage": CulturalHeritageTool(),
+    "arts_databases": ArtsDatabasesTool(),
+    "literature_archives": LiteratureArchivesTool()
+}
+```
+
+---
+
+## 📝 **PROFESSIONAL OUTPUT WITH COMPLETE CITATIONS**
+
+### **Citation-Integrated Output Generation**
+```python
+class ProfessionalOutputGenerator:
+    def __init__(self, citation_manager, source_tracker):
+        self.citation_manager = citation_manager
+        self.source_tracker = source_tracker
+        
+    def generate_research_report(self, content, sources, format_type, citation_style='APA'):
+        """
+        Generate professional research output with complete source attribution
+        - Embed proper in-text citations
+        - Generate comprehensive bibliography
+        - Maintain citation consistency
+        - Include source quality indicators
+        """
+        
+        # Process content with inline citations
+        cited_content = self.embed_inline_citations(content, sources, citation_style)
+        
+        # Generate comprehensive bibliography
+        bibliography = self.citation_manager.generate_bibliography(sources, citation_style)
+        
+        # Create source quality appendix
+        source_analysis = self.generate_source_analysis(sources)
+        
+        # Format according to requested output type
+        formatted_output = self.format_output({
+            'title': self.generate_title(content),
+            'abstract': self.generate_abstract(content),
+            'main_content': cited_content,
+            'bibliography': bibliography,
+            'source_analysis': source_analysis,
+            'methodology_note': self.generate_methodology_note()
+        }, format_type)
+        
+        return formatted_output
+        
+    def embed_inline_citations(self, content, sources, citation_style):
+        """
+        Properly embed citations within text content
+        - Match content segments to sources
+        - Insert appropriate inline citations
+        - Maintain citation consistency
+        """
+        cited_paragraphs = []
+        
+        for paragraph in content.split('\n\n'):
+            # Identify source attributions for paragraph content
+            paragraph_sources = self.identify_paragraph_sources(paragraph, sources)
+            
+            # Insert inline citations
+            cited_paragraph = self.insert_citations(paragraph, paragraph_sources, citation_style)
+            cited_paragraphs.append(cited_paragraph)
+            
+        return '\n\n'.join(cited_paragraphs)
+```
+
+### **Output Format Templates with Citations**
+```python
+OUTPUT_TEMPLATES = {
+    'academic_paper': {
+        'structure': ['title', 'abstract', 'introduction', 'methodology', 'findings', 'discussion', 'conclusion', 'references'],
+        'citation_density': 'high',
+        'source_quality_threshold': 0.8,
+        'bibliography_required': True
+    },
+    'research_brief': {
+        'structure': ['executive_summary', 'key_findings', 'sources', 'recommendations'],
+        'citation_density': 'medium',
+        'source_quality_threshold': 0.7,
+        'bibliography_required': True
+    },
+    'comprehensive_report': {
+        'structure': ['cover', 'contents', 'executive_summary', 'methodology', 'analysis', 'findings', 'recommendations', 'appendices', 'bibliography'],
+        'citation_density': 'high',
+        'source_quality_threshold': 0.8,
+        'bibliography_required': True
+    },
+    'fact_sheet': {
+        'structure': ['summary', 'key_facts', 'sources'],
+        'citation_density': 'very_high',
+        'source_quality_threshold': 0.9,
+        'bibliography_required': True
+    }
+}
+```
+
+---
+
+## 🎯 **ENHANCED FEATURE REQUIREMENTS**
+
+### **Phase 1: Universal Research Foundation**
+- [ ] Domain-agnostic research capability
+- [ ] **Comprehensive source attribution system**
+- [ ] **Multi-format citation generation (APA, MLA, Chicago, etc.)**
+- [ ] Basic self-improvement framework
+- [ ] Hybrid LLM routing with source tracking
+- [ ] Initial tool suite (15 tools) with full source capture
+
+### **Phase 2: Source Intelligence & Scale**
+- [ ] **Advanced source credibility assessment**
+- [ ] **Cross-domain source correlation**
+- [ ] 40+ API tools with source attribution
+- [ ] **Automated bibliography generation**
+- [ ] **Source quality indicators and warnings**
+- [ ] Performance analytics with source metrics
+
+### **Phase 3: Domain Mastery**
+- [ ] **Niche subject specialization algorithms**
+- [ ] **Broad topic synthesis capabilities**
+- [ ] **Expert source identification and prioritization**
+- [ ] **Multi-domain knowledge integration**
+- [ ] Advanced learning from source quality patterns
+- [ ] Complete API suite (60+ tools)
+
+### **Phase 4: Professional Research Output**
+- [ ] **Academic paper generation with proper citations**
+- [ ] **Professional report templates with bibliography**
+- [ ] **Multi-format citation export capabilities**
+- [ ] **Source analysis and quality appendices**
+- [ ] Interactive research dashboard with source mapping
+- [ ] **Plagiarism detection and originality verification**
+
+### **Phase 5: Research Excellence**
+- [ ] **Advanced source authentication**
+- [ ] **Cross-reference validation systems**
+- [ ] **Research methodology documentation**
+- [ ] **Citation network analysis**
+- [ ] Long-term research pattern learning
+- [ ] **Publication-ready output generation**
+
+---
+
+## 📈 **SUCCESS METRICS (SOURCE-FOCUSED)**
+
+### **Source Attribution Quality**
+- **Citation Accuracy**: Percentage of properly formatted citations
+- **Source Coverage**: Ratio of claimed facts to supporting sources  
+- **Bibliography Completeness**: All sources properly documented
+- **Citation Consistency**: Uniform formatting across outputs
+- **Source Accessibility**: Percentage of sources that are verifiable
+
+### **Research Capability Metrics**
+- **Domain Adaptability**: Success rate across different subject areas
+- **Niche Subject Handling**: Quality of research on specialized topics
+- **Source Quality Score**: Average credibility of sources used
+- **Cross-Domain Synthesis**: Ability to connect information across fields
+- **Research Depth Achievement**: Meeting complexity requirements for topics
+
+### **User Trust & Reliability**
+- **Source Transparency**: User confidence in source attributions
+- **Research Verifiability**: Ability for users to verify claims
+- **Academic Standards Compliance**: Meeting scholarly research requirements
+- **Professional Output Quality**: Acceptance in professional contexts
+- **Fact-Checking Accuracy**: Verification of research claims
+
+---
+
+## 💡 **KEY DIFFERENTIATORS**
+
+1. **Universal Research Capability**: Handles any domain from niche to broad
+2. **Comprehensive Source Attribution**: Every fact traceable to original source
+3. **Professional Citation Standards**: Multiple academic formats supported
+4. **Adaptive Research Strategy**: Scales approach based on topic complexity
+5. **Source Quality Intelligence**: Evaluates and indicates source credibility
+6. **Domain-Agnostic Learning**: Improves across all research areas
+7. **Publication-Ready Output**: Meets professional and academic standards
+
+This enhanced PRD ensures the agent functions as a **comprehensive research assistant** that can handle any subject matter while maintaining the **highest standards of source attribution and academic integrity**. The system is designed to be equally effective whether researching cutting-edge quantum computing techniques or traditional gardening methods, always providing complete traceability of information to original sources.
